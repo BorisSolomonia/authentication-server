@@ -13,7 +13,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                git url: 'https://github.com/BorisSolomonia/reflection-auth-server.git', branch: 'master', credentialsId: "${GIT_CREDENTIALS_ID}"
+                git url: 'https://github.com/BorisSolomonia/authentication-server.git', branch: 'master', credentialsId: "${GIT_CREDENTIALS_ID}"
             }
         }
         stage('Build and Push Image') {
@@ -34,14 +34,14 @@ pipeline {
         stage('Deploy') {
             steps {
                 script {
-                    sh "sed -i 's|IMAGE_URL|${REPO_URL}|g' auth-server-deployment.yaml"
+                    sh "sed -i 's|IMAGE_URL|${REPO_URL}|g' authentication-server-deployment.yaml"
                     withCredentials([file(credentialsId: "${GC_KEY}", variable: 'GC_KEY_FILE')]) {
                         step([
                             $class: 'KubernetesEngineBuilder',
                             projectId: env.PROJECT_ID,
                             cluster: "${env.CLUSTER} (${env.ZONE})", // Ensure this is correct
                             location: env.ZONE,
-                            manifestPattern: 'auth-server-deployment.yaml',
+                            manifestPattern: 'authentication-server-deployment.yaml',
                             credentialsId: "${PROJECT_ID}",
                             verifyDeployments: true
                         ])
