@@ -81,6 +81,19 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<plugin>
+				<groupId>com.google.cloud.tools</groupId>
+        		<artifactId>jib-maven-plugin</artifactId>
+				<configuration>
+					<from>
+						<image>openjdk:17</image>
+					</from>
+					<to>
+						<image>${REPO_URL}/authentication-server</image>
+						<tags>${project.version}</tags>
+					</to>
+				</configuration>
+			</plugin>
 	</build>
 
 </project>
