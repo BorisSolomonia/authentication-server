@@ -23,7 +23,7 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: DB_HOST
-              value: jdbc:postgresql://postgres/postgres
+              value: jdbc:postgresql://postgres:5432/postgres
 ---
 apiVersion: v1
 kind: Service
