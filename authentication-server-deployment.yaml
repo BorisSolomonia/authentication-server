@@ -23,7 +23,6 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: DB_HOST
-              # value: jdbc:postgresql://postgres:5432/postgres
               value: jdbc:postgresql://postgres.default.svc.cluster.local:5432/postgres
 ---
 apiVersion: v1
