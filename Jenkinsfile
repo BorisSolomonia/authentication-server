@@ -21,7 +21,7 @@ pipeline {
                 withCredentials([file(credentialsId: "${GC_KEY}", variable: 'GC_KEY_FILE')]) {
                     script {
                         withEnv(["GOOGLE_APPLICATION_CREDENTIALS=${GC_KEY_FILE}"]) {
-                            sh "gcloud auth activate-service-account --key-file=${GC_KEY_FILE} --verbosity=info"
+                            sh "gcloud auth activate-service-account --key-file=${GC_KEY_FILE} --verbosity=INFO"
                             sh 'gcloud auth configure-docker'
                         }
                         def mvnHome = tool name: 'maven', type: 'maven'
