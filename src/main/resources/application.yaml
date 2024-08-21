@@ -12,7 +12,7 @@ spring:
   application:
     name: AUTHENTICATION-SERVER
   datasource:
-    url: ${DB_HOST:jdbc:postgresql://localhost:5432/postgres}
+    url: ${DB_HOST}
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
