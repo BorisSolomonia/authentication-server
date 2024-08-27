@@ -23,7 +23,11 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: DB_HOST
-              value: jdbc:postgresql://postgres.default.svc.cluster.local:5432/postgres
+              value: jdbc:postgresql://10.2.0.8:5432/postgres
+            - name: AUTH_SERVER
+              value: http://10.2.0.132:8080
+            - name: AUTH_SERVER_JWKS
+              value: http://10.2.0.132:8080/oauth2/jwks
 ---
 apiVersion: v1
 kind: Service
