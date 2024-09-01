@@ -15,6 +15,7 @@ spec:
       containers:
         - name: authentication-server
           image: borissolomonia/microservices-authentication-server:latest #dockerhub ზე განთავსებული იმიჯია საჭირო
+          imagePullPolicy: Always
           ports:
             - containerPort: 8081
           env:
