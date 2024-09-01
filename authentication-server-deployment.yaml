@@ -18,8 +18,8 @@ spec:
           ports:
             - containerPort: 8081
           env:
-            - name: EUREKA_SERVER_ADDRESS
-              value: "http://reflect-service-registry:8761/eureka"
+            # - name: EUREKA_SERVER_ADDRESS
+            #   value: "http://reflect-service-registry:8761/eureka"
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: DB_HOST
