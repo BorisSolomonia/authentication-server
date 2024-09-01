@@ -14,13 +14,10 @@ spec:
     spec:
       containers:
         - name: authentication-server
-          image: borissolomonia/microservices-authentication-server:latest #dockerhub ზე განთავსებული იმიჯია საჭირო
-          imagePullPolicy: Always
+          image: IMAGE_URL  # This will be replaced by the actual image URL via sed
           ports:
             - containerPort: 8081
           env:
-            # - name: EUREKA_SERVER_ADDRESS
-            #   value: "http://reflect-service-registry:8761/eureka"
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: DB_HOST
@@ -31,11 +28,11 @@ spec:
               value: http://10.2.0.132:8080/oauth2/jwks
           resources:
             requests:
-              cpu: "200m"          # Reduced CPU request
-              memory: "512Mi"      # Reduced Memory request
+              cpu: "200m"
+              memory: "512Mi"
             limits:
-              cpu: "400m"          # Adjusted CPU limit
-              memory: "1Gi"      
+              cpu: "400m"
+              memory: "1Gi" 
 ---
 apiVersion: v1
 kind: Service
