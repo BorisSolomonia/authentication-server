@@ -28,13 +28,13 @@ spec:
               value: http://10.2.0.132:8080
             - name: AUTH_SERVER_JWKS
               value: http://10.2.0.132:8080/oauth2/jwks
-        resources:
-          requests:
-            cpu: "200m"          # Reduced CPU request
-            memory: "512Mi"      # Reduced Memory request
-          limits:
-            cpu: "400m"          # Adjusted CPU limit
-            memory: "1Gi"      
+          resources:
+            requests:
+              cpu: "200m"          # Reduced CPU request
+              memory: "512Mi"      # Reduced Memory request
+            limits:
+              cpu: "400m"          # Adjusted CPU limit
+              memory: "1Gi"      
 ---
 apiVersion: v1
 kind: Service
