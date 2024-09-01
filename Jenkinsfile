@@ -89,7 +89,7 @@ pipeline {
                         sh "${mvnCMD} com.google.cloud.tools:jib-maven-plugin:3.4.3:build -Dimage=${imageFullName}"
 
                         // Update deployment manifest with new image
-                        sh "sed -i 's|IMAGE_URL|${imageFullName}|g' k8s/authentication-server-deployment.yaml"
+                        sh "sed -i 's|IMAGE_URL|${imageFullName}|g' authentication-server-deployment.yaml"
                     }
                 }
             }
@@ -100,7 +100,7 @@ pipeline {
                     script {
                         sh "gcloud auth activate-service-account --key-file=${GC_KEY_FILE} --verbosity=info"
                         sh "gcloud container clusters get-credentials ${CLUSTER} --zone ${ZONE} --project ${PROJECT_ID}"
-                        sh "kubectl apply -f k8s/authentication-server-deployment.yaml"
+                        sh "kubectl apply -f authentication-server-deployment.yaml"
                     }
                 }
             }
