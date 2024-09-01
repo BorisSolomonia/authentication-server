@@ -26,7 +26,7 @@ public class SignInController {
         if (Objects.isNull(request)) {
             System.out.println("wwwwwwwwwwwwwwwwww");
         }
-        System.out.println("request = " + request.username());
+        System.out.println("request ----------------------AAAAAAAAAAAAAA = " + request.username());
         return new ResponseEntity<>(signInUserAuthenticationService
                 .authenticate(AuthenticationDTO.builder() // ეს იმიტიომ არის საჭირო რომ საინ ინ კლასში დტო არის
                         .username(request.username())
