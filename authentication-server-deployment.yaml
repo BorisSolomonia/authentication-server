@@ -39,6 +39,7 @@ kind: Service
 metadata:
   name: authentication-server
 spec:
+  type: LoadBalancer
   ports:
     - port: 8081
       targetPort: 8081
