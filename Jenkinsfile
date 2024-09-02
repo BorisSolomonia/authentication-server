@@ -65,6 +65,8 @@ pipeline {
         IMAGE_NAME = 'authentication-server'
         CLUSTER = 'reflection-cluster-1'
         ZONE = 'us-central1'  // Ensure this matches the zone where your cluster is located
+        AUTH_SERVER = 'http://34.121.119.90:8080'
+        AUTH_SERVER_JWKS = 'http://34.121.119.90:8080/oauth2/jwks'
     }
     stages {
         stage('Checkout') {

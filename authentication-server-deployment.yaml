@@ -23,9 +23,9 @@ spec:
             - name: DB_HOST
               value: jdbc:postgresql://10.2.0.8:5432/postgres
             - name: AUTH_SERVER
-              value: http://10.2.0.132:8080
+              value: http://34.121.119.90:8080
             - name: AUTH_SERVER_JWKS
-              value: http://10.2.0.132:8080/oauth2/jwks
+              value: http://34.121.119.90:8080/oauth2/jwks
           resources:
             requests:
               cpu: "200m"
