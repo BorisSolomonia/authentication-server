@@ -69,24 +69,24 @@ public class SecurityConfig {
         return new JwtIssuerAuthenticationManagerResolver(map::get);
     }
 
-//    private AuthenticationManager authenticationManager(String jwkSetUri) {
-//        System.out.println("Fetching JWK Set from URI: " + jwkSetUri);
-//        JwtDecoder decoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
-//        JwtAuthenticationProvider provider = new JwtAuthenticationProvider(decoder);
-//
-//        return new ProviderManager(provider);
-//    }
-
     private AuthenticationManager authenticationManager(String jwkSetUri) {
         System.out.println("Fetching JWK Set from URI: " + jwkSetUri);
         JwtDecoder decoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
         JwtAuthenticationProvider provider = new JwtAuthenticationProvider(decoder);
-        provider.setJwtAuthenticationConverter(jwt -> {
-            System.out.println("JWT Token: " + jwt.getTokenValue());
-            return new JwtAuthenticationToken(jwt);
-        });
+
         return new ProviderManager(provider);
     }
+
+//    private AuthenticationManager authenticationManager(String jwkSetUri) {
+//        System.out.println("Fetching JWK Set from URI: " + jwkSetUri);
+//        JwtDecoder decoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
+//        JwtAuthenticationProvider provider = new JwtAuthenticationProvider(decoder);
+//        provider.setJwtAuthenticationConverter(jwt -> {
+//            System.out.println("JWT Token: " + jwt.getTokenValue());
+//            return new JwtAuthenticationToken(jwt);
+//        });
+//        return new ProviderManager(provider);
+//    }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
