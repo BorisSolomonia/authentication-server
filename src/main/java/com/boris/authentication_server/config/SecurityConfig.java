@@ -27,20 +27,34 @@ import java.util.Objects;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    //@Bean
+//    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+//        httpSecurity
+//                .csrf(csrf -> csrf.ignoringRequestMatchers("/user-auth").disable())
+//                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/login/login").permitAll())
+//                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/sign-in/sign").permitAll())
+//                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/third-party/login").permitAll())
+//                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .authorizeHttpRequests(r -> r.anyRequest().authenticated())
+//                .oauth2ResourceServer(outh -> outh.authenticationManagerResolver(authManagerResolver()))
+//                .cors(c -> c.configurationSource(corsConfigurationSource()));
+//
+//        return httpSecurity.build();
+//    }
+
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/user-auth").disable())
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/user-auth").disable())  // Disable CSRF for the specified paths
                 .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/login/login").permitAll())
                 .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/sign-in/sign").permitAll())
-                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/third-party/login").permitAll())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests(r -> r.anyRequest().authenticated())
                 .oauth2ResourceServer(outh -> outh.authenticationManagerResolver(authManagerResolver()))
-                .cors(c -> c.configurationSource(corsConfigurationSource()));
+                .cors(c -> c.configurationSource(corsConfigurationSource()));  // Explicitly provide the CORS configuration source
 
         return httpSecurity.build();
     }
+
 
 //    @Bean
 //    public JwtIssuerAuthenticationManagerResolver authManagerResolver() {
@@ -77,16 +91,29 @@ public class SecurityConfig {
         return new ProviderManager(provider);
     }
 
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.addAllowedMethod("*");
+//        configuration.addAllowedOrigin("*");
+//        configuration.addAllowedHeader("*");
+//        configuration.setExposedHeaders(List.of("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+//        UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
+//        corsConfigurationSource.registerCorsConfiguration("/**", configuration);
+//        return corsConfigurationSource;
+//    }
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.addAllowedMethod("*");
-        configuration.addAllowedOrigin("*");
-        configuration.addAllowedHeader("*");
+        configuration.setAllowedOrigins(List.of("https://www.brooks-dusura.uk"));  // Allow only your front-end domain
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));  // Allow these HTTP methods
+        configuration.setAllowedHeaders(List.of("*"));  // Allow all headers
+        configuration.setAllowCredentials(true);  // Allow credentials like cookies
         configuration.setExposedHeaders(List.of("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
-        UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
-        corsConfigurationSource.registerCorsConfiguration("/**", configuration);
-        return corsConfigurationSource;
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);  // Apply CORS to all routes
+        return source;
     }
 
     @Bean
