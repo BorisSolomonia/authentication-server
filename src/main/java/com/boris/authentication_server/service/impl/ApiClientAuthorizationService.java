@@ -31,17 +31,35 @@ public class ApiClientAuthorizationService implements AuthorizationService {
     @Autowired
     private RestTemplate restTemplate;
 
+//    @Override
+//    public AuthorizationTokenResponse generateToken(AuthorizationParam param) {
+////       ეს პარამეტრები გადმოიტანეთ application.yaml ფაილიდან
+//        // ეს მეთოდი ქმნის ახალ რექვესთს რომელიც გაგზავნის ტოკენის გენერირებისთვის Authorization სერვერზე, ამ მეთოდში გადმოიტანეთ პარამეტრები რომლებიც გადმოიტანეთ რექვესთის ჰედერიდან
+//        HttpHeaders headers = new HttpHeaders(); // ეს არის ჰედერების ობიექტი
+//        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED); // ეს არის ჰედერების ტიპი, კონკრეტულად სულ არსებობს რაღაც ტიპის ჰედერები რომლებიც შეიძლება გამოიყენებდეს რექვესთებისთვის. ეს კონკრეტული კი იმას აკეთებს რომ რექვესთის ტიპი იყოს application/x-www-form-urlencoded
+//        headers.setBasicAuth(clientId, clientSecret); // ეს არის ბეისიკ ავთორიზაციის ჰედერი, რომელიც არის სტრინგი რომლის ფორმატია არის "მომხმარებელი:პაროლი"
+//        param.getHeaderParam().forEach(headers::set); // ეს ციკლი იტერაციას აკეთებს ყველა პარამეტრზე რომლებიც გადმოიტანეთ რექვესთის ჰედერიდან და ყველა პარამეტრს დაამატებს ჰედერებში
+//        HttpEntity<String> request = new HttpEntity<>("grant_type=client_credentials", headers);
+//        System.out.println("ssssssssssssssssssssss "+request.toString());
+//        return restTemplate.postForObject(oauthTokenUrl, request, AuthorizationTokenResponse.class); //ეს არის რექვესთი რომელიც გაგზავნის ტოკენის გენერირებისთვის, oauthTokenUrl არის ტოკენის გენერირების ლინკი, request არის რექვესთის ტიპი და AuthorizationTokenResponse.class არის რესპონსის ტიპი
+//    }
+
     @Override
     public AuthorizationTokenResponse generateToken(AuthorizationParam param) {
-//       ეს პარამეტრები გადმოიტანეთ application.yaml ფაილიდან
-        // ეს მეთოდი ქმნის ახალ რექვესთს რომელიც გაგზავნის ტოკენის გენერირებისთვის Authorization სერვერზე, ამ მეთოდში გადმოიტანეთ პარამეტრები რომლებიც გადმოიტანეთ რექვესთის ჰედერიდან
-        HttpHeaders headers = new HttpHeaders(); // ეს არის ჰედერების ობიექტი
-        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED); // ეს არის ჰედერების ტიპი, კონკრეტულად სულ არსებობს რაღაც ტიპის ჰედერები რომლებიც შეიძლება გამოიყენებდეს რექვესთებისთვის. ეს კონკრეტული კი იმას აკეთებს რომ რექვესთის ტიპი იყოს application/x-www-form-urlencoded
-        headers.setBasicAuth(clientId, clientSecret); // ეს არის ბეისიკ ავთორიზაციის ჰედერი, რომელიც არის სტრინგი რომლის ფორმატია არის "მომხმარებელი:პაროლი"
-        param.getHeaderParam().forEach(headers::set); // ეს ციკლი იტერაციას აკეთებს ყველა პარამეტრზე რომლებიც გადმოიტანეთ რექვესთის ჰედერიდან და ყველა პარამეტრს დაამატებს ჰედერებში
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+        headers.setBasicAuth(clientId, clientSecret);
+        param.getHeaderParam().forEach(headers::set);
         HttpEntity<String> request = new HttpEntity<>("grant_type=client_credentials", headers);
-        System.out.println("ssssssssssssssssssssss "+request.toString());
-        return restTemplate.postForObject(oauthTokenUrl, request, AuthorizationTokenResponse.class); //ეს არის რექვესთი რომელიც გაგზავნის ტოკენის გენერირებისთვის, oauthTokenUrl არის ტოკენის გენერირების ლინკი, request არის რექვესთის ტიპი და AuthorizationTokenResponse.class არის რესპონსის ტიპი
+        System.out.println("Request: " + request.toString());
+
+        AuthorizationTokenResponse response = restTemplate.postForObject(oauthTokenUrl, request, AuthorizationTokenResponse.class);
+        if (response != null) {
+            System.out.println("JWT Token: " + response.getToken());
+        } else {
+            System.out.println("Failed to generate JWT token.");
+        }
+        return response;
     }
 
     private String basicEncodeCredential(String id, String secret) {
