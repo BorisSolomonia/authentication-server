@@ -51,11 +51,11 @@ public class ApiClientAuthorizationService implements AuthorizationService {
         headers.setBasicAuth(clientId, clientSecret);
         param.getHeaderParam().forEach(headers::set);
         HttpEntity<String> request = new HttpEntity<>("grant_type=client_credentials", headers);
-        System.out.println("Request: " + request.toString());
+        System.out.println(("Request: {}" +  request.toString()));
 
         AuthorizationTokenResponse response = restTemplate.postForObject(oauthTokenUrl, request, AuthorizationTokenResponse.class);
         if (response != null) {
-            System.out.println("JWT Token: " + response.getToken());
+            System.out.println(("JWT Token: {}" +  response.accessToken()));
         } else {
             System.out.println("Failed to generate JWT token.");
         }
