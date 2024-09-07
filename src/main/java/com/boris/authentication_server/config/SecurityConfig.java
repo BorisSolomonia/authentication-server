@@ -12,6 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.oauth2.server.resource.authentication.JwtIssuerAuthenticationManagerResolver;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
@@ -85,10 +86,21 @@ public class SecurityConfig {
         return new JwtIssuerAuthenticationManagerResolver(map::get);
     }
 
+//    private AuthenticationManager authenticationManager(String jwkSetUri) {
+//        System.out.println("Fetching JWK Set from URI: " + jwkSetUri);
+//        JwtDecoder decoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
+//        JwtAuthenticationProvider provider = new JwtAuthenticationProvider(decoder);
+//        return new ProviderManager(provider);
+//    }
+
     private AuthenticationManager authenticationManager(String jwkSetUri) {
         System.out.println("Fetching JWK Set from URI: " + jwkSetUri);
         JwtDecoder decoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
         JwtAuthenticationProvider provider = new JwtAuthenticationProvider(decoder);
+        provider.setJwtAuthenticationConverter(jwt -> {
+            System.out.println("JWT Token: " + jwt.getTokenValue());
+            return new JwtAuthenticationToken(jwt);
+        });
         return new ProviderManager(provider);
     }
 
