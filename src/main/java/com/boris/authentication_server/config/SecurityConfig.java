@@ -1,9 +1,5 @@
 package com.boris.authentication_server.config;
 
-import jakarta.servlet.FilterChain;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,16 +12,12 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationProvider;
-import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;
 import org.springframework.security.oauth2.server.resource.authentication.JwtIssuerAuthenticationManagerResolver;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,6 +27,20 @@ import java.util.Objects;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    //@Bean
+//    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+//        httpSecurity
+//                .csrf(csrf -> csrf.ignoringRequestMatchers("/user-auth").disable())
+//                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/login/login").permitAll())
+//                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/sign-in/sign").permitAll())
+//                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/third-party/login").permitAll())
+//                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                .authorizeHttpRequests(r -> r.anyRequest().authenticated())
+//                .oauth2ResourceServer(outh -> outh.authenticationManagerResolver(authManagerResolver()))
+//                .cors(c -> c.configurationSource(corsConfigurationSource()));
+//
+//        return httpSecurity.build();
+//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
@@ -49,6 +55,16 @@ public class SecurityConfig {
         return httpSecurity.build();
 
     }
+
+
+//    @Bean
+//    public JwtIssuerAuthenticationManagerResolver authManagerResolver() {
+//        Map<String, AuthenticationManager> map = new HashMap<>();
+//        map.put("https://accounts.google.com", authenticationManager("https://www.googleapis.com/oauth2/v3/certs"));
+//        return new JwtIssuerAuthenticationManagerResolver(map::get);
+//    }
+
+    // Define a bean that provides a JwtIssuerAuthenticationManagerResolver
 
     @Value("${AUTH_SERVER:http://localhost:8080}")
     private String authServerUrl;
@@ -73,19 +89,19 @@ public class SecurityConfig {
         System.out.println("Fetching JWK Set from URI: " + jwkSetUri);
         JwtDecoder decoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
         JwtAuthenticationProvider provider = new JwtAuthenticationProvider(decoder);
-
         return new ProviderManager(provider);
     }
 
-//    private AuthenticationManager authenticationManager(String jwkSetUri) {
-//        System.out.println("Fetching JWK Set from URI: " + jwkSetUri);
-//        JwtDecoder decoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
-//        JwtAuthenticationProvider provider = new JwtAuthenticationProvider(decoder);
-//        provider.setJwtAuthenticationConverter(jwt -> {
-//            System.out.println("JWT Token: " + jwt.getTokenValue());
-//            return new JwtAuthenticationToken(jwt);
-//        });
-//        return new ProviderManager(provider);
+//    @Bean
+//    public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.addAllowedMethod("*");
+//        configuration.addAllowedOrigin("*");
+//        configuration.addAllowedHeader("*");
+//        configuration.setExposedHeaders(List.of("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+//        UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
+//        corsConfigurationSource.registerCorsConfiguration("/**", configuration);
+//        return corsConfigurationSource;
 //    }
 
     @Bean
@@ -106,4 +122,3 @@ public class SecurityConfig {
         return (web) -> web.ignoring().requestMatchers("/sign-in", "/login", "postgres-console/**");
     }
 }
-
