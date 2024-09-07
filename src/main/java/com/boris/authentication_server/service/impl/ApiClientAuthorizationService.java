@@ -44,6 +44,8 @@ public class ApiClientAuthorizationService implements AuthorizationService {
 //        return restTemplate.postForObject(oauthTokenUrl, request, AuthorizationTokenResponse.class); //ეს არის რექვესთი რომელიც გაგზავნის ტოკენის გენერირებისთვის, oauthTokenUrl არის ტოკენის გენერირების ლინკი, request არის რექვესთის ტიპი და AuthorizationTokenResponse.class არის რესპონსის ტიპი
 //    }
 
+
+
     @Override
     public AuthorizationTokenResponse generateToken(AuthorizationParam param) {
         HttpHeaders headers = new HttpHeaders();
