@@ -53,6 +53,7 @@ public class SecurityConfig {
                 .cors(c -> c.configurationSource(corsConfigurationSource()));  // Explicitly provide the CORS configuration source
 
         return httpSecurity.build();
+        
     }
 
 
