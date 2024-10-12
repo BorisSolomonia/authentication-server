@@ -114,8 +114,8 @@
 pipeline {
     agent any
     environment {
-        GIT_CREDENTIALS_ID = 'github-credentials-id'  // Change to your actual credentials ID
-        GC_KEY = 'gke-credentials-id'  // Change to your actual Google Cloud credentials ID
+        GIT_CREDENTIALS_ID = 'git'  // Change to your actual credentials ID
+        GC_KEY = 'gcp'  // Change to your actual Google Cloud credentials ID
         REGISTRY_URI = 'us-east4-docker.pkg.dev'
         PROJECT_ID = 'brooks-437520'
         ARTIFACT_REGISTRY = 'brooks-artifacts'
