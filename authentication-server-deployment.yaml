@@ -28,11 +28,11 @@ spec:
               value: http://34.121.119.90:8080/oauth2/jwks
           resources:
             requests:
-              cpu: "200m"
-              memory: "512Mi"
+              cpu: "100m"
+              memory: "128Mi"
             limits:
-              cpu: "400m"
-              memory: "1Gi" 
+              cpu: "100m"
+              memory: "128Mi" 
 ---
 apiVersion: v1
 kind: Service
