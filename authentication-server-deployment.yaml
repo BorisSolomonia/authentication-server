@@ -18,10 +18,16 @@ spec:
           ports:
             - containerPort: 8081
           env:
+            - name: POSTGRES_DB
+              value: postgres
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: DB_HOST
-              value: jdbc:postgresql://10.99.243.38:5432/postgres
+              value: jdbc:postgresql://postgres:5432/postgres  # Use the service name 'postgres' instead of IP
+            - name: POSTGRES_USER
+              value: postgres
+            - name: POSTGRES_PASSWORD
+              value: postgres
             - name: AUTH_SERVER
               value: http://34.121.119.90:8080
             - name: AUTH_SERVER_JWKS
@@ -32,7 +38,7 @@ spec:
               memory: "128Mi"
             limits:
               cpu: "100m"
-              memory: "128Mi" 
+              memory: "128Mi"
 ---
 apiVersion: v1
 kind: Service
