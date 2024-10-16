@@ -23,7 +23,7 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: DB_HOST
-              value: jdbc:postgresql://10.99.243.38:5432/postgres  # Use the service name 'postgres' instead of IP
+              value: jdbc:postgresql://10.99.243.38:5432/postgres
             - name: POSTGRES_USER
               value: postgres
             - name: POSTGRES_PASSWORD
@@ -32,6 +32,12 @@ spec:
               value: http://34.121.119.90:8080
             - name: AUTH_SERVER_JWKS
               value: http://34.121.119.90:8080/oauth2/jwks
+            - name: LOGGING_LEVEL_ROOT  # This variable will set the root log level
+              value: "DEBUG"
+            - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_JDBC
+              value: "DEBUG"
+            - name: LOGGING_LEVEL_COM_EXAMPLE_REPOSITORY
+              value: "DEBUG" 
           resources:
             requests:
               cpu: "100m"
