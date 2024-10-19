@@ -23,7 +23,7 @@ spec:
             - name: SPRING_PROFILES_ACTIVE
               value: "prod"
             - name: DB_HOST
-              value: jdbc:postgresql://postgres:5432/postgres
+              value: jdbc:postgresql://10.99.243.38:5432/postgres
             - name: POSTGRES_USER
               value: postgres
             - name: POSTGRES_PASSWORD
