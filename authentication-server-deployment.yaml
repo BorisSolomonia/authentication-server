@@ -12,6 +12,15 @@ spec:
       labels:
         app: authentication-server
     spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: kubernetes.io/hostname
+                operator: In
+                values:
+                - gke-low-cost-cluster-default-pool-04626fef-h9xn
       containers:
         - name: authentication-server
           image: IMAGE_URL  # This will be replaced by the actual image URL via sed
@@ -40,10 +49,10 @@ spec:
               value: "DEBUG" 
           resources:
             requests:
-              cpu: "200m"
+              cpu: "20m"
               memory: "256Mi"
             limits:
-              cpu: "200m"
+              cpu: "20m"
               memory: "256Mi"
 ---
 apiVersion: v1
