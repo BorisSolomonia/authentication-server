@@ -38,9 +38,9 @@ spec:
             - name: POSTGRES_PASSWORD
               value: postgres
             - name: AUTH_SERVER
-              value: http://34.121.119.90:8080
+              value: http://146.148.50.47:8080
             - name: AUTH_SERVER_JWKS
-              value: http://34.121.119.90:8080/oauth2/jwks
+              value: http://146.148.50.47:8080/oauth2/jwks
             - name: LOGGING_LEVEL_ROOT  # This variable will set the root log level
               value: "DEBUG"
             - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_JDBC
