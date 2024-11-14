@@ -85,6 +85,13 @@ public class SecurityConfig {
         configuration.setAllowedHeaders(List.of("*"));  // Allow all headers
         configuration.setAllowCredentials(true);  // Allow credentials like cookies
         configuration.setExposedHeaders(List.of("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+
+        // Adding logging for debugging purposes
+        System.out.println("CORS Configuration Initialized: ");
+        System.out.println("Allowed Origins: " + configuration.getAllowedOrigins());
+        System.out.println("Allowed Methods: " + configuration.getAllowedMethods());
+        System.out.println("Allowed Headers: " + configuration.getAllowedHeaders());
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);  // Apply CORS to all routes
         return source;
