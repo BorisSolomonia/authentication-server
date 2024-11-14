@@ -28,21 +28,6 @@ import java.util.Objects;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    //@Bean
-//    public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-//        httpSecurity
-//                .csrf(csrf -> csrf.ignoringRequestMatchers("/user-auth").disable())
-//                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/login/login").permitAll())
-//                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/sign-in/sign").permitAll())
-//                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/third-party/login").permitAll())
-//                .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-//                .authorizeHttpRequests(r -> r.anyRequest().authenticated())
-//                .oauth2ResourceServer(outh -> outh.authenticationManagerResolver(authManagerResolver()))
-//                .cors(c -> c.configurationSource(corsConfigurationSource()));
-//
-//        return httpSecurity.build();
-//    }
-
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
@@ -58,12 +43,6 @@ public class SecurityConfig {
     }
 
 
-//    @Bean
-//    public JwtIssuerAuthenticationManagerResolver authManagerResolver() {
-//        Map<String, AuthenticationManager> map = new HashMap<>();
-//        map.put("https://accounts.google.com", authenticationManager("https://www.googleapis.com/oauth2/v3/certs"));
-//        return new JwtIssuerAuthenticationManagerResolver(map::get);
-//    }
 
     // Define a bean that provides a JwtIssuerAuthenticationManagerResolver
 
@@ -86,12 +65,6 @@ public class SecurityConfig {
         return new JwtIssuerAuthenticationManagerResolver(map::get);
     }
 
-//    private AuthenticationManager authenticationManager(String jwkSetUri) {
-//        System.out.println("Fetching JWK Set from URI: " + jwkSetUri);
-//        JwtDecoder decoder = NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
-//        JwtAuthenticationProvider provider = new JwtAuthenticationProvider(decoder);
-//        return new ProviderManager(provider);
-//    }
 
     private AuthenticationManager authenticationManager(String jwkSetUri) {
         System.out.println("Fetching JWK Set from URI: " + jwkSetUri);
@@ -103,18 +76,6 @@ public class SecurityConfig {
         });
         return new ProviderManager(provider);
     }
-
-//    @Bean
-//    public CorsConfigurationSource corsConfigurationSource() {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.addAllowedMethod("*");
-//        configuration.addAllowedOrigin("*");
-//        configuration.addAllowedHeader("*");
-//        configuration.setExposedHeaders(List.of("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
-//        UrlBasedCorsConfigurationSource corsConfigurationSource = new UrlBasedCorsConfigurationSource();
-//        corsConfigurationSource.registerCorsConfiguration("/**", configuration);
-//        return corsConfigurationSource;
-//    }
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
