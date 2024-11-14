@@ -30,6 +30,7 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+        System.out.println("Configuring Security Filter Chain");
         httpSecurity
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/user-auth").disable())  // Disable CSRF for the specified paths
                 .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/login/login").permitAll())
@@ -88,8 +89,6 @@ public class SecurityConfig {
 
         // Adding logging for debugging purposes
         System.out.println("CORS Configuration Initialized: ");
-        System.out.println("Allowed Origins: " + configuration.getAllowedOrigins());
-        System.out.println("Allowed Methods: " + configuration.getAllowedMethods());
         System.out.println("Allowed Headers: " + configuration.getAllowedHeaders());
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
