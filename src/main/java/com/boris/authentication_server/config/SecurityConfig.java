@@ -32,12 +32,11 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
         System.out.println("Configuring Security Filter Chain");
         httpSecurity
+                .cors(c -> c.configurationSource(corsConfigurationSource())) // Explicitly provide the CORS configuration source
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/user-auth").disable())  // Disable CSRF for the specified paths
-                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/login/login").permitAll())
-                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/sign-in/sign").permitAll())
+                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/login/login", "/user-auth/sign-in/sign").permitAll())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .oauth2ResourceServer(outh -> outh.authenticationManagerResolver(authManagerResolver()))
-                .cors(c -> c.configurationSource(corsConfigurationSource()));  // Explicitly provide the CORS configuration source
+                .oauth2ResourceServer(outh -> outh.authenticationManagerResolver(authManagerResolver()));
 
         return httpSecurity.build();
 
