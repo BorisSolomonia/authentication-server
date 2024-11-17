@@ -82,6 +82,7 @@ public class SecurityConfig {
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowedOrigins(List.of("https://www.brooks-dusura.uk"));  // Allow only your front-end domain
+        System.out.println("Allowed Headers: " + configuration.getAllowedHeaders());
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));  // Allow these HTTP methods
         configuration.setAllowedHeaders(List.of("*"));  // Allow all headers
         configuration.setAllowCredentials(true);  // Allow credentials like cookies
