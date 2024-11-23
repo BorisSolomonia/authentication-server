@@ -32,8 +32,9 @@ oauth:
 #  ეს არის ავტორიზაციის სერვერის მისამართი სადაც არის კლიენტის ინფორმაცია, ამით ხდება კლიენტის ვალიდაცია, ავტორიზაციის სერვერისთვის ამ შემთხვევაში კლიენტი არის ეს, აუთენთიფიკაციის სერვერი
   api-client-id: api-client-id
   api-client-secret: api123
-#logging:
-#  level:
-#    org:
-#      springframework: DEBUG
+logging:
+  level:
+    org:
+      springframework: DEBUG
+    root: debug
 
