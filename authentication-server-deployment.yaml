@@ -42,11 +42,11 @@ spec:
             - name: AUTH_SERVER_JWKS
               value: http://34.67.92.189:8080/oauth2/jwks
             - name: LOGGING_LEVEL_ROOT  # This variable will set the root log level
-              value: "DEBUG"
+              value: "INFO"
             - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_JDBC
-              value: "DEBUG"
+              value: "INFO"
             - name: LOGGING_LEVEL_COM_EXAMPLE_REPOSITORY
-              value: "DEBUG" 
+              value: "INFO"
           resources:
             requests:
               cpu: "20m"
