@@ -35,6 +35,7 @@ oauth:
 logging:
   level:
     org:
-      springframework: DEBUG
-    root: debug
+      springframework: info
+    root: info
+    
 
