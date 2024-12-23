@@ -34,7 +34,7 @@ public class SecurityConfig {
         httpSecurity
                 .cors(c -> c.configurationSource(corsConfigurationSource())) // Explicitly provide the CORS configuration source
                 .csrf(csrf -> csrf.ignoringRequestMatchers("/user-auth").disable())  // Disable CSRF for the specified paths
-                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/login/login", "/user-auth/sign-in/sign").permitAll())
+                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/login/login", "/user-auth/sign-in/sign","/actuator/health").permitAll())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(outh -> outh.authenticationManagerResolver(authManagerResolver()));
 
