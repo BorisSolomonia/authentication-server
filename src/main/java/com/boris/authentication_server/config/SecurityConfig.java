@@ -33,8 +33,8 @@ public class SecurityConfig {
         System.out.println("Configuring Security Filter Chain");
         httpSecurity
                 .cors(c -> c.configurationSource(corsConfigurationSource())) // Explicitly provide the CORS configuration source
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/user-auth").disable())  // Disable CSRF for the specified paths
-                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth/login/login", "/user-auth/sign-in/sign","/actuator/health").permitAll())
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/users-auth").disable())  // Disable CSRF for the specified paths
+                .authorizeHttpRequests(r -> r.requestMatchers("/user-auth","/user-auth/login/login", "/user-auth/sign-in/sign","/actuator/health").permitAll())
                 .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .oauth2ResourceServer(outh -> outh.authenticationManagerResolver(authManagerResolver()));
 
