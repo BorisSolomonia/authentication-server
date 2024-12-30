@@ -13,7 +13,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableTransactionManagement
 @EnableDiscoveryClient
 public class AuthenticationServerApplication {
-	
+
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
