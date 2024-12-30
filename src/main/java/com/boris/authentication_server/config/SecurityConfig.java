@@ -79,20 +79,29 @@ public class SecurityConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+//        CorsConfiguration configuration = new CorsConfiguration();
+//        configuration.setAllowedOrigins(List.of("https://www.brooks-dusura.uk"));  // Allow only your front-end domain
+//        System.out.println("Allowed Headers: " + configuration.getAllowedHeaders());
+//        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));  // Allow these HTTP methods
+//        configuration.setAllowedHeaders(List.of("*"));  // Allow all headers
+//        configuration.setAllowCredentials(true);  // Allow credentials like cookies
+//        configuration.setExposedHeaders(List.of("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
+//
+//        // Adding logging for debugging purposes
+//        System.out.println("CORS Configuration Initialized: ");
+//        System.out.println("Allowed Headers: " + configuration.getAllowedHeaders());
+//
+//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+//        source.registerCorsConfiguration("/**", configuration);  // Apply CORS to all routes
+//        return source;
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("https://www.brooks-dusura.uk"));  // Allow only your front-end domain
-        System.out.println("Allowed Headers: " + configuration.getAllowedHeaders());
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));  // Allow these HTTP methods
-        configuration.setAllowedHeaders(List.of("*"));  // Allow all headers
-        configuration.setAllowCredentials(true);  // Allow credentials like cookies
-        configuration.setExposedHeaders(List.of("Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
-
-        // Adding logging for debugging purposes
-        System.out.println("CORS Configuration Initialized: ");
-        System.out.println("Allowed Headers: " + configuration.getAllowedHeaders());
+        configuration.setAllowedOrigins(List.of("*")); // Allow all origins
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS")); // Allow these HTTP methods
+        configuration.setAllowedHeaders(List.of("*")); // Allow all headers
+        configuration.setAllowCredentials(true); // Allow credentials like cookies
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        source.registerCorsConfiguration("/**", configuration);  // Apply CORS to all routes
+        source.registerCorsConfiguration("/**", configuration); // Apply CORS to all routes
         return source;
     }
 
