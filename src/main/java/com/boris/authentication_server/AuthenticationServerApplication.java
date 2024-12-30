@@ -14,6 +14,7 @@ import org.springframework.web.client.RestTemplate;
 @EnableDiscoveryClient
 public class AuthenticationServerApplication {
 
+	System.out.print("გამარჯობა ბორისი");
 	@Bean
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
