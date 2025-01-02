@@ -35,7 +35,11 @@ oauth:
 logging:
   level:
     org:
-      springframework: info
+      springframework:
+        security: debug
+        web:
+          filter:
+            org.springframework.web.filter.CommonsRequestLoggingFilter: debug
     root: info
 
 
