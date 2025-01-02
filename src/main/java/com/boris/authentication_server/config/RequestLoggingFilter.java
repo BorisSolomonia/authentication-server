@@ -22,6 +22,12 @@ public class RequestLoggingFilter implements Filter {
                     httpServletRequest.getMethod(),
                     httpServletRequest.getRequestURI(),
                     httpServletRequest.getHeaderNames().asIterator());
+            logger.info("boria kai gamarjoba");
+            logger.info("Headers:");
+            httpServletRequest.getHeaderNames().asIterator().forEachRemaining(
+                    header -> logger.info("{}: {}", header, httpServletRequest.getHeader(header))
+            );
+
         }
         try {
             chain.doFilter(request, response);
