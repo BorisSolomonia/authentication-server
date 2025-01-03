@@ -46,10 +46,10 @@ public class SecurityConfig {
 
     // Define a bean that provides a JwtIssuerAuthenticationManagerResolver
 
-    @Value("${AUTH_SERVER:http://localhost:8080}")
+    @Value("${AUTH_SERVER:http://34.67.92.189:8080}")
     private String authServerUrl;
 
-    @Value("${AUTH_SERVER_JWKS:http://localhost:8080/oauth2/jwks}")
+    @Value("${AUTH_SERVER_JWKS:http://34.67.92.189:8080/oauth2/jwks}")
     private String authServerJwksUrl;
 
     @Bean
