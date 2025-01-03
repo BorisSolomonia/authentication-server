@@ -14,6 +14,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 //  ეს არის სერვისი რომელიც გამოიყენება ტოკენის გენერირებისთვის, ის რექვესთის ჰედერიდან იღებს პარამეტრებს და აბრუნებს ტოკენს. ის იყენებს პარამეტრებს application.yaml ფაილიდან
 //@Service
